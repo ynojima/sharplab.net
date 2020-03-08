@@ -24,8 +24,8 @@ collections:
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Featured Image", name: "thumbnail", widget: "image", required: false }
 
-  - name: "Tech Blog"
-    label: "Tech Blog"
+  - name: "Technology"
+    label: "Technology"
     folder: "content/blog/technology"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
