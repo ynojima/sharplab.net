@@ -1,0 +1,7 @@
+#intelliJ
+/.idea
+/*.iml
+
+/public
+/resources
+/node_modules

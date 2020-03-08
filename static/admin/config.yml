@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: master
+
+locale: 'ja'
+
+media_folder: "static/img"
+public_folder : "/img"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "Blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
