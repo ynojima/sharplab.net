@@ -1,6 +1,5 @@
-
 ---
 title: "Diary"
 linkTitle: "Diary"
-weight: 10
+weight: 20
 ---
