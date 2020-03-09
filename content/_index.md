@@ -3,7 +3,7 @@ title: SharpLab.
 linkTitle: SharpLab.
 layout: docs
 ---
-{{% blocks/cover title="SharpLab." height="max" image_anchor="center" %}}
+{{% blocks/cover title="SharpLab." height="mid" image_anchor="center" %}}
 
 {{% /blocks/cover %}}
 
