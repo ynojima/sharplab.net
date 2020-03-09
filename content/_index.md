@@ -4,16 +4,11 @@ linkTitle: SharpLab.
 layout: docs
 ---
 
-{{% blocks/cover title="SharpLab." height="auto" %}}
-
+{{% blocks/cover title="SharpLab." height="min" image_anchor="center" %}}
 
 {{% /blocks/cover %}}
 
-
-{{% blocks/lead color="dark" %}}
-{{% /blocks/lead %}}
-
-{{< blocks/section color="primary" type="features">}}
+{{< blocks/section type="features" height="auto" >}}
 
 {{% blocks/feature icon="fas fa-rss-square" title="Blog" url="/blog/" %}}
 Memorandums are posted here.
@@ -27,8 +22,7 @@ Featured projects are listed here.
 shiroica is an Twitter account owned by Yoshikazu Nojima.
 {{% /blocks/feature %}}
 
-
 {{< /blocks/section >}}
 
-{{% blocks/section color="primary" %}}
-{{% /blocks/section %}}
+{{< blocks/section height="auto" >}}
+{{< /blocks/section >}}

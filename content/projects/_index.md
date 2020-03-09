@@ -8,8 +8,7 @@ layout: docs
 ---
 
 
-{{< blocks/section color="primary" type="features">}}
-
+{{< blocks/section height="full" color="primary" type="features">}}
 
 {{% blocks/feature icon="fa-landmark" title="WebAuthn4J" url="https://github.com/webauthn4j/webauthn4j" %}}
 A portable Java library for WebAuthn server side verification.
