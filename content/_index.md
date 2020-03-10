@@ -5,6 +5,11 @@ layout: docs
 ---
 {{% blocks/cover title="SharpLab." height="full" image_anchor="center" %}}
 
+<div class="my-5">
+SharpLab. is a personal web site authored by Yoshikazu Nojima.
+Projects and memorandum are posted occasionally.
+</div>
+
 <div class="col">
     <div class="row features">
         <div class="col-lg-4 mb-5 mb-lg-0 text-center ">
