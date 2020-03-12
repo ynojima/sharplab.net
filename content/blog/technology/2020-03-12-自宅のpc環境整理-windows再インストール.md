@@ -1,7 +1,7 @@
 ---
 layout: blog
 date: 2020-03-12T23:09:16.898Z
-title: 自宅のPC環境整理 - Windows再インストール
+title: 自宅のPC環境整理 (1) - Windows再インストール
 ---
 良い機会なので、最近、自宅のPC環境を整理してます。
 
