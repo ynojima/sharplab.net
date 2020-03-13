@@ -66,9 +66,10 @@ git submodule update --init --recursive
 hugo
 ```
 
-DocsyテーマでBlog機能利用時の注意点
-
 ### Netlify CMSの導入
+
+続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。
+
 
 ### Netlify CMSの設定
 
