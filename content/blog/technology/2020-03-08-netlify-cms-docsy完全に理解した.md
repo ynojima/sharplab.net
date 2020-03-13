@@ -113,6 +113,16 @@ command = "ngit submodule update -f --init --recursive; pm install; ./bin/hugo -
 HUGO_ENABLEGITINFO = "true"
 ```
 
+#### Netlifyへのサインアップ
+
+Netlify公式サイトからサインアップし、これまでの編集を行ったレポジトリからサイトをデプロイする設定を行いましょう。
+
+<https://app.netlify.com/>
+
+サインアップ時には、GitHubなど、Gitレポジトリサービスのアカウントでシングルサインオンしてアカウント連携をするのがおススメです。
+
+サインアップ後、サイトを作成するウィザードが始まります。ウィザードに従って、Gitレポジトリサービスを選択し、レポジトリを選び、サイトを作成していきましょう。
+
 ### Netlify CMSの導入
 
 続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。Hugoの場合、`<site root>/static` に配置されたファイルが、静的リソースとして公開される為、Netlify CMSの導入の為に、`<site root>/static/admin/index.html`を以下の内容で作成します。
