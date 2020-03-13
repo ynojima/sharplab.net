@@ -95,7 +95,11 @@ hugo
 
 ### Netlify CMSの設定
 
-#### Netlify CMSをDocsyと組み合わせる場合のポイント
+最後に、Netlify CMSの設定をしていきましょう。
+
+Netlify CMSの設定は、Netlify CMSの`index.html`ファイルの隣に、`config.yml`というファイルを作成することで可能です。Netlify CMSで画像をアップロードする際のアップロード先ディレクトリや、CMSでエントリを作成する際の作成先ディレクトリ、コンテンツ保存バックエンド等を設定可能です。
+
+詳しくは[Netlify CMSの公式ドキュメント](https://www.netlifycms.org/docs/add-to-your-site/#configuration)を参照してください。
 
 ## まとめ
 
