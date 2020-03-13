@@ -45,6 +45,8 @@ hugo new site <site-name>
 
 ### Docsyテーマの導入
 
+Docsyのテーマは以下のコマンドで導入することができます。
+
 ```
 # docsyテーマが依存するユーティリティをnpmでインストール
 sudo npm install -D --save autoprefixer
@@ -58,6 +60,8 @@ echo 'theme = "docsy"' >> config.toml
 git submodule update --init --recursive
 ```
 
+参考：<https://www.docsy.dev/docs/getting-started/#option-2-use-the-docsy-theme-in-your-own-site>
+
 ### サイトのビルド
 
 サイトのビルドは、以下の通り、`hugo` コマンドを単体で呼び出すことで実行できます。
@@ -66,9 +70,28 @@ git submodule update --init --recursive
 hugo
 ```
 
+参考：<https://gohugo.io/getting-started/usage/#the-hugo-command>
+
 ### Netlify CMSの導入
 
-続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。Hugoの場合、`<site root>/static` が
+続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。Hugoの場合、`<site root>/static` に配置されたファイルが、静的リソースとして公開される為、Netlify CMSの導入の為に、`<site root>/static/admin/index.html`を以下の内容で作成します。
+
+```
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+</head>
+<body>
+  <!-- Include the script that builds the page and powers Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+</body>
+</html>
+```
+
+参考：<https://www.netlifycms.org/docs/add-to-your-site/#app-file-structure>
 
 ### Netlify CMSの設定
 
