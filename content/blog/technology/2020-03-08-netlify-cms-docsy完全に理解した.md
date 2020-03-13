@@ -31,19 +31,75 @@ Netlify CMS上でコンテンツの入力を完了し、「保存」ボタンを
 
 ### Hugoのインストール
 
+Hugoは、Go言語で開発されているため、シングルバイナリで動作します。実行ファイルは公式のGitHubのリリースページにAssetsとして公開されている為、実行環境に合わせたバイナリをダウンロードし、パスの通ったディレクトリに配置しておきましょう。
+
+<https://github.com/gohugoio/hugo/releases>
+
 ### ディレクトリ構造の生成
+
+Hugoはコンテンツファイルや、テーマファイルがどのように配置されているべきかについて、期待するディレクトリ構造を持ちます。この構造に従い、ミニマムなディレクトリ構成を以下のコマンドで生成しましょう。
+
+```shell
+hugo new site <site-name>
+```
 
 ### Docsyテーマの導入
 
+Docsyのテーマは以下のコマンドで導入することができます。
+
+```
+# docsyテーマが依存するユーティリティをnpmでインストール
+sudo npm install -D --save autoprefixer
+sudo npm install -D --save postcss-cli
+
+# docsyテーマをsubmoduleとして導入
+cd <site-name>
+git init
+git submodule add https://github.com/google/docsy.git themes/docsy
+echo 'theme = "docsy"' >> config.toml
+git submodule update --init --recursive
+```
+
+参考：<https://www.docsy.dev/docs/getting-started/#option-2-use-the-docsy-theme-in-your-own-site>
+
 ### サイトのビルド
 
-DocsyテーマでBlog機能利用時の注意点
+サイトのビルドは、以下の通り、`hugo` コマンドを単体で呼び出すことで実行できます。
+
+```
+hugo
+```
+
+参考：<https://gohugo.io/getting-started/usage/#the-hugo-command>
 
 ### Netlify CMSの導入
 
+続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。Hugoの場合、`<site root>/static` に配置されたファイルが、静的リソースとして公開される為、Netlify CMSの導入の為に、`<site root>/static/admin/index.html`を以下の内容で作成します。
+
+```
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+</head>
+<body>
+  <!-- Include the script that builds the page and powers Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+</body>
+</html>
+```
+
+参考：<https://www.netlifycms.org/docs/add-to-your-site/#app-file-structure>
+
 ### Netlify CMSの設定
 
-#### Netlify CMSをDocsyと組み合わせる場合のポイント
+最後に、Netlify CMSの設定をしていきましょう。
+
+Netlify CMSの設定は、Netlify CMSの`index.html`ファイルの隣に、`config.yml`というファイルを作成することで可能です。Netlify CMSで画像をアップロードする際のアップロード先ディレクトリや、CMSでエントリを作成する際の作成先ディレクトリ、コンテンツ保存バックエンド等を設定可能です。
+
+詳しくは[Netlify CMSの公式ドキュメント](https://www.netlifycms.org/docs/add-to-your-site/#configuration)を参照してください。
 
 ## まとめ
 
