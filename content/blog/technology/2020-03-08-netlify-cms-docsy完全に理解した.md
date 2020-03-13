@@ -68,8 +68,7 @@ hugo
 
 ### Netlify CMSの導入
 
-続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。
-
+続いては、Netlify CMSの導入です。Netlify CMSは、静的リソースとして公開されるディレクトリに所定のHTMLファイルを配置することで、導入が可能です。Hugoの場合、`<site root>/static` が
 
 ### Netlify CMSの設定
 
