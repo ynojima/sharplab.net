@@ -15,6 +15,8 @@ Hugoは、Markdownなどで記述されたコンテンツをベースに、テ�
 
 Docsyは、Google発のHugoのテーマで、オープンソースソフトウェアの公開ページなど、技術文書公開に適した機能を重点的に具備していることが特徴です。[Kubeflowの公式サイト](https://www.kubeflow.org/)もDocsyで構築されているようです。
 
+![](/img/docsy.png "Docsy")
+
 ## Netlify
 
 NetlifyはGitHub等レポジトリサービスと連携し、レポジトリの更新を契機にコンテンツを取得し、ビルドして成果物を公開する継続的デリバリ機能と、無償プランから独自ドメイン持込でHTTPSが利用できることが特徴の静的サイトのホスティングサービスです。
@@ -110,8 +112,6 @@ command = "ngit submodule update -f --init --recursive; pm install; ./bin/hugo -
 [context.next.environment]
 HUGO_ENABLEGITINFO = "true"
 ```
-
-
 
 ### Netlify CMSの導入
 
