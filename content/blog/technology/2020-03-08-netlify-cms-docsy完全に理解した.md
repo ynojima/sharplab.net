@@ -9,11 +9,11 @@ title: Netlify CMS + DocsyでBlog構築
 
 ## Hugo
 
-Hugoは、その名前から推測がつくように、Go言語で開発された静的サイトジェネレータで、Markdownなどで記述されたコンテンツをベースに、テンプレートを適用して静的なサイトを生成してくれるツールです。コンテンツ執筆者はMarkdownなどで簡単にコンテンツを記述出来つつも、テンプレートを適用することでサイトを適切にスタイリング出来ます。従来のWordPressのような動的なCMSでは、DBや実行環境の維持管理をする必要がありましたが、Hugoのような静的サイトジェネレータを利用する場合は、最終的な成果物は静的なファイルとして出力されるので、Netlifyのような静的サイトのホスティングサービスにデプロイすることが出来、維持管理コストを削減することが出来ることが魅力です。
+Hugoは、Markdownなどで記述されたコンテンツをベースに、テーマを適用して静的なサイトを生成してくれる静的サイトジェネレータです。その名前から推測がつくように、Go言語で開発されています。コンテンツ執筆者はMarkdownなどで簡単にコンテンツを記述出来つつも、テーマを適用することでサイトを適切にスタイリング出来ます。従来のWordPressのような動的なCMSでは、DBや実行環境の維持管理をする必要がありましたが、Hugoのような静的サイトジェネレータを利用する場合は、最終的な成果物は静的なファイルとして出力されるので、Netlifyのような静的サイトのホスティングサービスにデプロイすることが出来、維持管理コストを削減することが出来ることが魅力です。
 
 ## Docsy
 
-Docsyは、Google発のHugoのテーマで、オープンソースソフトウェアの公開ページなど、技術文書公開に適した機能を重点的に具備していることが特徴です。Kubeflowの公式サイトはDocsyで構築されているようです。
+Docsyは、Google発のHugoのテーマで、オープンソースソフトウェアの公開ページなど、技術文書公開に適した機能を重点的に具備していることが特徴です。[Kubeflowの公式サイト](https://www.kubeflow.org/)もDocsyで構築されているようです。
 
 ## Netlify
 
@@ -21,9 +21,9 @@ NetlifyはGitHub等レポジトリサービスと連携し、レポジトリの�
 
 ## Netlify CMS
 
-![](/img/netlify-cms.png)
+![](/img/netlify-cms.png "Netlify CMS")
 
-Netlify CMSは、前述のNetlifyが提供している、静的サイトジェネレータと組み合わせて使うことを前提とした、新しいコンセプトのCMSです。Netlify CMSとして提供される、管理画面を提供する2つのファイル（HTMLファイルとYAMLファイル）を組み込み先のサイトに対して追加した上でそのパスに対してアクセスすると、Netlify CMSは静的サイトのコンテンツが保管されているGitHub等のレポジトリに対して（Netlifyを経由して？）APIアクセスを行い、コンテンツの編集機能を提供します。
+Netlify CMSは、前述のNetlifyが提供しており、静的サイトジェネレータと組み合わせて使うことを前提とした、新しいコンセプトのCMSです。Netlify CMSとして提供される、管理画面を提供する2つのファイル（HTMLファイルとYAMLファイル）を組み込み先のサイトに対して追加した上でそのパスに対してアクセスすると、Netlify CMSは静的サイトのコンテンツが保管されているGitHub等のレポジトリに対して（Netlifyを経由して？）APIアクセスを行い、コンテンツの編集機能を提供します。
 
 Netlify CMS上でコンテンツの入力を完了し、「保存」ボタンを押下すると、コンテンツの内容はGitHub等のレポジトリに対してコミットされ、そのコミットをトリガーにNetlifyはHugo等静的コンテンツジェネレータを実行し、ビルドして得られたコンテンツを表示する、という連携が動作します。
 
@@ -33,7 +33,7 @@ Netlify CMS上でコンテンツの入力を完了し、「保存」ボタンを
 
 ### Hugoのインストール
 
-Hugoは、Go言語で開発されているため、シングルバイナリで動作します。実行ファイルは公式のGitHubのリリースページにAssetsとして公開されている為、実行環境に合わせたバイナリをダウンロードし、パスの通ったディレクトリに配置しておきましょう。
+Hugoは、Go言語で開発されているため、シングルバイナリで動作します。実行ファイルは公式のGitHubのリリースページにAssetsとして公開されている為、実行環境に合わせたバイナリをダウンロードし、パスの通ったディレクトリに配置しておきましょう。Hugoには、通常版とExtended版が存在しますが、DocsyはExtended版を必要とするため、Extended版をダウンロードしましょう。
 
 <https://github.com/gohugoio/hugo/releases>
 
@@ -64,6 +64,8 @@ git submodule update --init --recursive
 
 参考：<https://www.docsy.dev/docs/getting-started/#option-2-use-the-docsy-theme-in-your-own-site>
 
+Docsyテーマの細かいカスタマイズについては、[公式ドキュメント](https://www.docsy.dev/docs/adding-content/lookandfeel/)を参照してください。
+
 ### サイトのビルド
 
 サイトのビルドは、`hugo` コマンドを単体で呼び出すことで実行できます。
@@ -73,6 +75,43 @@ hugo
 ```
 
 参考：<https://gohugo.io/getting-started/usage/#the-hugo-command>
+
+### Netlifyの利用開始
+
+では、サイトの基本的な構造ができたところで、Netlifyにデプロイしてみましょう。
+
+まず、Netlifyで継続的デリバリを実行するのに必要なファイルを準備します。
+
+#### Hugoのバイナリ
+
+Netlifyの継続的デリバリ機能でサイトをビルドするために、HugoのLinux用バイナリをレポジトリにコミットしておきましょう。NetlifyもHugoのバイナリを提供してくれますが、Extended版ではないので、Docsyを使う為に[sharplab.net では、binディレクトリを作成し、hugoのバイナリをコミットしています](https://github.com/sharplab/sharplab.net/tree/master/bin)。
+
+#### Netlifyの設定ファイル
+
+Netlifyは、netlify.tomlというファイルを継続的デリバリ対象のレポジトリのルートディレクトリに配置しておくことで、そのファイルに記述した設定に従い、継続的デリバリを実行してくれます。
+
+sharplab.netでは、以下のような設定を行い、必要な依存関係を取得した上で、コミットしたhugoのバイナリでビルドを行っています。
+
+```
+[build]
+publish = "public"
+command = "git submodule update -f --init --recursive; npm install; ./bin/hugo --gc --minify"
+HUGO_ENV = "production"
+
+[context.production.environment]
+HUGO_ENABLEGITINFO = "true"
+
+[context.deploy-preview]
+command = "git submodule update -f --init --recursive; npm install; ./bin/hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+command = "ngit submodule update -f --init --recursive; pm install; ./bin/hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+[context.next.environment]
+HUGO_ENABLEGITINFO = "true"
+```
+
+
 
 ### Netlify CMSの導入
 
