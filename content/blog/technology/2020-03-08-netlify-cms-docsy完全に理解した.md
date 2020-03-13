@@ -31,11 +31,40 @@ Netlify CMS上でコンテンツの入力を完了し、「保存」ボタンを
 
 ### Hugoのインストール
 
+Hugoは、Go言語で開発されているため、シングルバイナリで動作します。実行ファイルは公式のGitHubのリリースページにAssetsとして公開されている為、実行環境に合わせたバイナリをダウンロードし、パスの通ったディレクトリに配置しておきましょう。
+
+<https://github.com/gohugoio/hugo/releases>
+
 ### ディレクトリ構造の生成
+
+Hugoはコンテンツファイルや、テーマファイルがどのように配置されているべきかについて、期待するディレクトリ構造を持ちます。この構造に従い、ミニマムなディレクトリ構成を以下のコマンドで生成しましょう。
+
+```shell
+hugo new site <site-name>
+```
 
 ### Docsyテーマの導入
 
+```
+# docsyテーマが依存するユーティリティをnpmでインストール
+sudo npm install -D --save autoprefixer
+sudo npm install -D --save postcss-cli
+
+# docsyテーマをsubmoduleとして導入
+cd <site-name>
+git init
+git submodule add https://github.com/google/docsy.git themes/docsy
+echo 'theme = "docsy"' >> config.toml
+git submodule update --init --recursive
+```
+
 ### サイトのビルド
+
+サイトのビルドは、以下の通り、`hugo` コマンドを単体で呼び出すことで実行できます。
+
+```
+hugo
+```
 
 DocsyテーマでBlog機能利用時の注意点
 
