@@ -1,0 +1,8 @@
+---
+layout: blog
+date: 2020-03-30T12:19:58.529Z
+title: Concourse CIのWorkerからコンテナホストマシンにアクセスできるようにする方法のメモ
+---
+Concourse CI、ビルドパイプラインをYAMLで定義出来て、管理サーバーはシングルバイナリで動作し、ビルドジョブ自体はコンテナ上で動作するという、素敵なCIサーバーですが、今回GitOpsで使う為に、セットアップしていて、コンテナの中で動作させたビルドジョブから、WorkerのホストVMに対してアクセスしようとして引っかかったのでメモ。
+
+Concourseのビルドジョブコンテナ内から、WorkerのホストVMにアクセスさせたい場合は、ConcourseのWorkerの起動時に、`CONCOURSE_WORKER_GARDEN_ALLOW_HOST_ACCESS`という環境変数にtrueを設定して起動すればよい。ただし、設定してConcourse Workerのプロセスを再起動するだけではダメで、一度Concourse Workerを動かしているマシンを再起動する必要がある模様（iptablesへの設定が上手くクリアされない？）
