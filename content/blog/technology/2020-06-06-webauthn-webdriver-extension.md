@@ -5,7 +5,9 @@ title: WebAuthn WebDriver Extension
 ---
 <!--StartFragment-->
 
-WebAuthnを認証に使用するサービスを開発したとして、テストを自動化しようとすると、Authenticatorをどう用意するかが問題となります。WebAuthn4Jでは、単体テストに組み込んで使うAuthenticatorとして、[WebAuthn仕様に定義されたModel Authenticatorのエミュレータ](https://github.com/webauthn4j/webauthn4j/tree/master/webauthn4j-test/src/main/java/com/webauthn4j/test/authenticator/webauthn)や、CTAP AuthenticatorをJavaで実装したりしてきました。
+WebAuthnを認証に使用するサービスを開発したとして、テストを自動化しようとすると、Authenticatorをどう用意するかが問題となります。
+
+WebAuthn4Jでは、単体テストに組み込んで使うAuthenticatorとして、[WebAuthn仕様に定義されたModel Authenticatorのエミュレータ](https://github.com/webauthn4j/webauthn4j/tree/master/webauthn4j-test/src/main/java/com/webauthn4j/test/authenticator/webauthn)や、CTAP AuthenticatorをJavaで実装したりしてきました。
 
 一方、ブラウザを含めたE2Eテストを実現しようとすると、ブラウザに接続し、テストコードから操作できるAuthenticatorを用意する必要があります。Chromeでは、この課題に対して、Web Authentication Testing APIとしう名前で、Chromeに対して仮想的なAuthenticatorを追加するフラグが用意されていました。何故過去形かというと、最近のStableリリースからは、このフラグが削除され、WebAuthn Level2仕様のドラフトで策定が進められている、WebAuthn WebDriver Extensionという、WebDriverの拡張という形のAPIに改められた為です。
 
