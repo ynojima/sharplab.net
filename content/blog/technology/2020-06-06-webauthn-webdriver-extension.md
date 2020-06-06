@@ -13,6 +13,8 @@ WebDriverは、E2Eテストなどでブラウザの操作の自動化を行う�
 
 WebAuthn WebDriver Extensionでは、Authenticatorの追加削除、Credentialの追加削除、UVフラグの設定等、実現出来る操作の自由度が増しており、WebAuthnを認証に使用するサービスとして実現したい操作をよくカバーしています。
 
-selenium-javaの4.0.0系は、2020年6月現在アルファ版ですが、[WebAuthn WebDriver Extensionのサポートが既に追加](https://github.com/SeleniumHQ/selenium/issues/7753)されており、[WebAuthn4j Spring Securityのテストもそちらに切り替えてみたところ、上手く動作することが確認できました。](https://github.com/webauthn4j/webauthn4j-spring-security/pull/354)
+selenium-javaの4.0.0系は、2020年6月現在アルファ版ですが、[WebAuthn WebDriver Extensionのサポートが既に追加](https://github.com/SeleniumHQ/selenium/issues/7753)されており、[WebAuthn4j Spring Securityのテストもそちらに切り替えてみたところ、上手く動作することが確認できました。](https://github.com/webauthn4j/webauthn4j-spring-security/blob/368681da1d4c2c23b97c6f1e80bebfb7ed0df3ca/samples/spa/src/test/java/e2e/RegistrationAndAuthenticationE2ETest.java#L74-L75)
+
+WebAuthnを認証に取り入れたサービスを開発する場合は、WebAuthn WebDriver Extensionを用いてE2Eテストを積極的に実装していきましょう。
 
 <!--EndFragment-->
