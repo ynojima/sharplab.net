@@ -9,7 +9,7 @@ WebAuthnを認証に使用するサービスを開発したとして、テスト
 
 WebAuthn4Jでは、単体テストに組み込んで使うAuthenticatorとして、[WebAuthn仕様に定義されたModel Authenticatorのエミュレータ](https://github.com/webauthn4j/webauthn4j/tree/master/webauthn4j-test/src/main/java/com/webauthn4j/test/authenticator/webauthn)や、CTAP AuthenticatorをJavaで実装したりしてきました。
 
-一方、ブラウザを含めたE2Eテストを実現しようとすると、ブラウザに接続し、テストコードから操作できるAuthenticatorを用意する必要があります。Chromeでは、この課題に対して、Web Authentication Testing APIとしう名前で、Chromeに対して仮想的なAuthenticatorを追加するフラグが用意されていました。何故過去形かというと、最近のStableリリースからは、このフラグが削除され、WebAuthn Level2仕様のドラフトで策定が進められている、WebAuthn WebDriver Extensionという、WebDriverの拡張という形のAPIに改められた為です。
+一方、ブラウザを含めたE2Eテストを実現しようとすると、ブラウザに接続し、テストコードから操作できるAuthenticatorを用意する必要があります。Chromeでは、この課題に対して、Web Authentication Testing APIとしう名前で、Chromeに対して仮想的なAuthenticatorを追加するフラグが用意されていました。何故過去形かというと、最近のStableリリースからは、このフラグが削除され、[WebAuthn Level2](https://www.w3.org/TR/webauthn-2/)仕様のドラフトで策定が進められている、[WebAuthn WebDriver Extension](https://www.w3.org/TR/webauthn-2/#sctn-automation)という、[WebDriver](https://www.w3.org/TR/webdriver/)の拡張という形のAPIに改められた為です。
 
 WebDriverは、E2Eテストなどでブラウザの操作の自動化を行う為のAPIで、各ブラウザ毎にDriverと呼ばれるソフトウェアが、JSONベースのREST APIの形式で、ブラウザの操作を自動化するAPIを公開しています。SeleniumなどのE2Eテストフレームワークは、このWebDriver APIを呼び出すクライアントという構成です。そして、このWebAuthn WebDriver Extensionは、WebAuthn関係の操作自動化を行う為に、WebDriverに追加のAPIを定義するものです。
 
