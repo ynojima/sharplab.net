@@ -18,7 +18,9 @@ CLIツールを作るなら、折角だからとネイティブビルドが出�
 
 ### 事前準備
 
-epub-translatorの実行には、Javaが必要です。Java11以降がインストールされた環境にGitHubのリリースページで配布されているepub-translator-runner.jarをダウンロードしてください。
+epub-translatorの実行には、Java11以降が必要です。適宜ダウンロードしてインストールして下さい。
+
+epub-translatorは、[GitHubのリリースページ](https://github.com/sharplab/epub-translator/releases)で配布しています。epub-translator-runner.jarというファイルをダウンロードしてください。
 
 また、epub-translatorは設定ファイルが必要です。epub-translator-runner.jarを配置したディレクトリに、configというサブディレクトリを作成し、その中にapplication.ymlというファイルを作成し、以下のフォーマットで、DeepLのAPI鍵を記載してください。
 
@@ -39,7 +41,10 @@ ePubTranslator:
 java -jar <path-to-epub-translator-dir>/epub-translator-runner.jar --src <path-to-epub-file>
 ```
 
-なお、epub-translatorはQuarkusを用いていることから、ネイティブビルドしたものも用意しており、Linuxで利用できるバイナリもGitHubのリリースページでepub-translator-runnerという名前で配布しています。
+### Linux用バイナリ
+
+なお、epub-translatorはQuarkusを用いていることから、ネイティブビルドにも対応しています。
+Linuxで利用できるバイナリもGitHubのリリースページでepub-translator-runnerという名前で配布しています。
 
 WSL2環境含むLinux環境で使えますので、こちらもお試し下さい。なお、Linuxバイナリの場合は、Java11のインストールは不要です。
 
