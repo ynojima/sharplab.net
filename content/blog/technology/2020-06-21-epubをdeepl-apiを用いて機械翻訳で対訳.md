@@ -22,7 +22,7 @@ epub-translatorの実行には、Java11以降が必要です。適宜ダウン�
 
 epub-translatorは、[GitHubのリリースページ](https://github.com/sharplab/epub-translator/releases)で配布しています。epub-translator-runner.jarというファイルをダウンロードしてください。
 
-また、epub-translatorは設定ファイルが必要です。epub-translator-runner.jarを配置したディレクトリに、configというサブディレクトリを作成し、その中にapplication.ymlというファイルを作成し、以下のフォーマットで、DeepLのAPI鍵を記載してください。
+また、epub-translatorは設定ファイルが必要です。epub-translator-runner.jarを配置したディレクトリに、configというサブディレクトリを作成し、その中にapplication.ymlというファイルを作成し、以下のフォーマットで、DeepLのAPI鍵を記載してください（API鍵の取得には、DeepLのAPIプランの契約が必要です。オンライン翻訳のStarterプランとは別なのでご注意下さい）。
 
 ```yaml
 ePubTranslator:
