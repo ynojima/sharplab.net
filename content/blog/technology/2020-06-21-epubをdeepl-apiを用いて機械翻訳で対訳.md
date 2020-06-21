@@ -8,7 +8,7 @@ EPub形式の電子書籍を、翻訳精度が良いことで最近話題のDeep
 
 <https://github.com/sharplab/epub-translator>
 
-CLIツールを作るなら、折角だからとネイティブビルドが出来、起動速度が速いことが特徴のQuarkusを使っています。
+CLIツールを作るなら、折角だからとネイティブビルドが出来、起動速度が速いことが特徴の[Quarkus](https://quarkus.io/)を使っています。
 
 ![](/img/epub-translator.png)
 
