@@ -86,7 +86,8 @@ StmtFormat =      {
 
 フォーマットとしてiOS Safariが先ほど返してきた”apple”ではなく、”apple-appatest”が指定されており、Attestation Statementの中には、algメンバが無い代わりに、receiptというメンバが含まれています。どうも、”apple-appatest”は、iOSアプリ向けの[App Attest API](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)の為のAttestation であり、WebAuthn向けの”apple” Attestationとは少し異なるようです。
 
-話がOID “1.2.840.113635.100.8.2“から逸れてしまいました。OID “1.2.840.113635.100.8.2“は、[”apple-appatest”の検証手順を解説したドキュメント](https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server)の中で、AuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュから得られるnonceと一致するか検証する為に用いられることが定められています。Apple Anonymous Attestationにはsigメンバが存在せず、AuthenticatorDataとClientDataの真正性の保証がどうやって行われるのか、謎でしたが、Attestation証明書の中にAuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュ（nonce）を含めることで真正性を検証可能にしていたのですね。
+話がOID “1.2.840.113635.100.8.2“から逸れてしまいました。OID “1.2.840.113635.100.8.2“は、[”apple-appatest”の検証手順を解説したドキュメント](https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server)の中で、AuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュから得られるnonceと一致するか検証する為に用いられることが定められています。このルールは、WebAuthnのApple Anonymous Attestationにも通用するようで、iOS Safariから返却されたAttestationのOID "1.2.840.113635.100.8.2"に含まれるデータで検証できました。
+Apple Anonymous Attestationにはsigメンバが存在せず、AuthenticatorDataとClientDataの真正性の保証がどうやって行われるのか謎でしたが、Attestation証明書の中にAuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュ（nonce）を含めることで真正性を検証可能にしていたのですね。
 
 ## 実装してみた
 
