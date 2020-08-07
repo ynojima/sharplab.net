@@ -4,7 +4,7 @@ date: 2020-08-07T13:53:56.791Z
 title: 解剖 Apple Anonymous Attestation
 thumbnail: ""
 ---
-iOS Public Beta4と共にSafariがアップデートされ、SafariのWebAuthnサポートでTouch ID/Face IDを利用した時にAttestationを返却するようになりました。AppleはPlatform Authenticatorが返却するAttestationとして、独自のApple Anonymous Attestation Statementを新たに定めており、その内容を紐解いてみたので共有です。
+iOS14 Public Beta4と共にSafariがアップデートされ、SafariのWebAuthnサポートでTouch ID/Face IDを利用した時にAttestationを返却するようになりました。AppleはPlatform Authenticatorが返却するAttestationとして、独自のApple Anonymous Attestation Statementを新たに定めており、その内容を紐解いてみたので共有です。
 
 ## Auth0 WebAuthn Debuggerでの調査
 
