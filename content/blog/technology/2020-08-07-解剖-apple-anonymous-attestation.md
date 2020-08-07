@@ -97,6 +97,6 @@ Apple Anonymous Attestationにはsigメンバが存在せず、AuthenticatorData
 
 ## まとめ
 
-AppleはiOS Public Beta4と共にSafariをアップデートし、Touch ID/Face IDを使ってiOSデバイスをPlatform Authenticatorとして利用した際に、WebAuthn APIはAttestationを返却するようになりました。Apple Anonymous Attestationという新しい形式のAttestationが導入されており、同じく8/4に新たに公開された[App Attest API](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)で用いられているAttestationと形式が類似しています（同一ではありません）。Apple Anonymous Attestationは、AuthenticatorDataとClientDataの真正性の保証を、Attestation証明書に、“1.2.840.113635.100.8.2“というOIDの拡張を含めることで実現しています。
+AppleはiOS14 Public Beta4と共にSafariをアップデートし、Touch ID/Face IDを使ってiOSデバイスをPlatform Authenticatorとして利用した際に、WebAuthn APIはAttestationを返却するようになりました。Apple Anonymous Attestationという新しい形式のAttestationが導入されており、同じく8/4に新たに公開された[App Attest API](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)で用いられているAttestationと形式が類似しています（同一ではありません）。Apple Anonymous Attestationは、AuthenticatorDataとClientDataの真正性の保証を、Attestation証明書に、“1.2.840.113635.100.8.2“というOIDの拡張を含めることで実現しています。
 
 iOS SafariでTouch ID/Face IDが利用できるようになったことにより、PC、Mac、Android、iPhone、主要デバイス全てでWebAuthnを利用する下地が出来たと言えます。特に、Touch ID/Face IDでのWebAuthnは、モバイルデバイスでのログインのユーザーエクスペリエンスを大きく向上させるものであり、WebAuthnの普及に繋がることを期待したいですね。
