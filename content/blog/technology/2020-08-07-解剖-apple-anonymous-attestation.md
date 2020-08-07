@@ -4,21 +4,21 @@ date: 2020-08-07T13:53:56.791Z
 title: 解剖 Apple Anonymous Attestation
 thumbnail: ""
 ---
-OS Public Beta4と共に、Safariがアップデートされ、SafariのWebAuthnサポートでTouch ID/Face IDを利用した時にAttestationを返却するようになりました。AppleはPlatform Authenticatorが返却するAttestationとして、独自のApple Anonymous Attestation Statementを新たに定めていて、その内容を紐解いてみたので共有です。
+OS Public Beta4と共にSafariがアップデートされ、SafariのWebAuthnサポートでTouch ID/Face IDを利用した時にAttestationを返却するようになりました。AppleはPlatform Authenticatorが返却するAttestationとして、独自のApple Anonymous Attestation Statementを新たに定めており、その内容を紐解いてみたので共有です。
 
-## Auth0 WebAuthn Debuggerでの解析
+## Auth0 WebAuthn Debuggerでの調査
 
 新しいAuthenticatorやClient Platformが出てきた時、その動作を検証する最も簡単な方法は、Auth0の提供するWebAuthn Debuggerというツールを使うことです。WebAuthnのAPIを呼び出すパラメータを自由に調整するGUIと、WebAuthnのAPIのレスポンスを読みやすい形に整形したうえで出力してくれるフォーマッタを備えた非常に便利なツールです。iOS 14 Public Beta4をインストールしたiPad miniで、AttestationパラメータにDirectを指定してAttestationがレスポンスに含まれるようにした状態で呼び出した結果が以下の通りです。
 
 ![Auth0 WebAuthn Debugger](/img/webauthn-debugger.png)
 
-フォーマットとして、”apple”が指定されたAttestation Statementが返却されています。このAttestation Statementを、Appleは、”Apple Anonymous Attestation”と名付けたようです。
+フォーマットとして、”apple”が指定されたAttestation Statementが返却されています。この新しいAttestation Statementを、Appleは、”Apple Anonymous Attestation”と名付けたようです。
 
 ## Apple Anonymous Attestationのフォーマット
 
 ”Apple Anonymous Attestation”の中身を見てみると、algパラメータにCOSEのアルゴリズムが、x5cパラメータにX.509証明書のリストが含まれているようです。ここまではPacked Attestation Statementや、Android Key Attestation Statementとあまり差はありませんね。
 
-Apple Anonymous Attestationで特徴的なのは、sigパラメータが存在しない点です。他のPackedやTPM、Android KeyといったAttestationでは、sigというパラメータにAuthenticatorDataとClientDataHashを連結したデータに対する署名が含まれており、その署名をAttestation証明書の公開鍵で検証することで、AuthenticatoDataやClientDataHashのデータの真正性を検証できたのですが、Apple Anonymous Attestationにsigがないとはどういうことなのでしょうか。Apple Anonymous Attestationは、公開鍵の真正性のみしか担保しないのでしょうか。実は、Apple Anonymous AttestationにもAuthenticatorDataとClientDataHashの真正性を担保するデータが含まれていますが、後述します。
+Apple Anonymous Attestationで特徴的なのは、sigパラメータが存在しない点です。他のPackedやTPM、Android KeyといったAttestationでは、sigというパラメータにAuthenticatorDataとClientDataHashを連結したデータに対する署名が含まれており、その署名をAttestation証明書の公開鍵で検証することで、AuthenticatoDataやClientDataHashのデータの真正性を検証できたのですが、Apple Anonymous Attestationにsigがないとはどういうことなのでしょうか。Apple Anonymous Attestationは、公開鍵の真正性のみしか担保しないのでしょうか。実は、Apple Anonymous AttestationにもAuthenticatorDataとClientDataHashの真正性を担保するデータが含まれており、後述したいと思います。
 
 ## X.509証明書の中身
 
@@ -68,7 +68,7 @@ SHA1 Fingerprint=50:D5:11:B0:F3:A0:7C:DF:AD:8F:37:8D:18:7F:31:77:77:39:5C:51
 
 ## OID “1.2.840.113635.100.8.2“とApp Attest API
 
-このAttestation証明書でもう一つ特徴的なのが、 “1.2.840.113635.100.8.2“というOIDを持った拡張の存在です。調べてみると、1.2.840.113635がAppleに割り当てられたプライベートなOIDで、1.2.840.113635.100.8.2の定義を調べていると、8月4日に発表された、[iOS 14以降で新たに提供された](https://developer.apple.com/jp/news/?id=2sngpulc)、[App Attest API](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)というものに辿り着きました。iOSでのアプリ開発については、全く土地勘を持たないので、斜め読みしただけなのですが、iOS14からは、デバイスがルート化されていたり侵害されていないかをチェックするためのAPIが提供されるようです。Androidでいうところの、Android SafetyNet APIに似ていますね。[そのAPIはデバイスの真正性を保証するデータとして、Attestation Statementというデータを返却するそうです。](https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server)まるでWebAuthnみたいですね？実際、こちらのAttestation Statementのドキュメントを読んでみると、Web Authenticationというキーワードが出てきており、WebAuthnの仕様を参考に設計されたAPIのようです。
+このAttestation証明書でもう一つ特徴的なのが、 “1.2.840.113635.100.8.2“というOIDを持った拡張の存在です。調べてみると、"1.2.840.113635"がAppleに割り当てられたプライベートなOIDで、OID "1.2.840.113635.100.8.2"の定義を調べていると、8月4日に発表された、[iOS 14以降で新たに提供された](https://developer.apple.com/jp/news/?id=2sngpulc)、[App Attest API](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)というものに辿り着きました。iOSでのアプリ開発については、全く土地勘を持たないので、斜め読みしただけなのですが、iOS14からは、デバイスがルート化されていたり侵害されていないかをチェックするためのAPIが提供されるようです。Androidでいうところの、Android SafetyNet APIに似ていますね。[そのAPIはデバイスの真正性を保証するデータとして、Attestation Statementというデータを返却するそうです。](https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server)まるでWebAuthnみたいですね？実際、こちらのAttestation Statementのドキュメントを読んでみると、Web Authenticationというキーワードが出てきており、WebAuthnの仕様を参考に設計されたAPIのようです。
 
 ただ一方でこちらのドキュメントで説明されているAttestation Statementのスキーマは以下の通りです。
 
@@ -86,7 +86,7 @@ StmtFormat =      {
 
 フォーマットとしてiOS Safariが先ほど返してきた”apple”ではなく、”apple-appatest”が指定されており、Attestation Statementの中には、algメンバが無い代わりに、receiptというメンバが含まれています。どうも、”apple-appatest”は、iOSアプリ向けの[App Attest API](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)の為のAttestation であり、WebAuthn向けの”apple” Attestationとは少し異なるようです。
 
-話が“1.2.840.113635.100.8.2“から逸れてしまいました。“1.2.840.113635.100.8.2“OIDは、[”apple-appatest”の検証手順を解説したドキュメント](https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server)の中で、AuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュから得られるnonceと一致するか検証することが定められています。Apple Anonymous Attestationにはsigメンバが存在せず、AuthenticatorDataとClientDataの真正性の保証がどうやって行われるのか、謎でしたが、Attestation証明書の中にAuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュを含めることで真正性を検証可能にしていたのですね。
+話がOID “1.2.840.113635.100.8.2“から逸れてしまいました。OID “1.2.840.113635.100.8.2“は、[”apple-appatest”の検証手順を解説したドキュメント](https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server)の中で、AuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュから得られるnonceと一致するか検証する為に用いられることが定められています。Apple Anonymous Attestationにはsigメンバが存在せず、AuthenticatorDataとClientDataの真正性の保証がどうやって行われるのか、謎でしたが、Attestation証明書の中にAuthenticatorDataとClientDataHashを連結したデータのSHA-256ハッシュ（nonce）を含めることで真正性を検証可能にしていたのですね。
 
 ## 実装してみた
 
